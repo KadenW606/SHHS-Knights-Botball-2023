@@ -1,0 +1,61 @@
+#!/usr/bin/python
+from kipr import *
+import time
+def sleep(x):
+    time.sleep(x)
+def ssp(n,p):
+    set_servo_position(n,p)
+cmpc(0)
+enable_servo(0)
+enable_servo(1)
+cmpc(3)   
+
+def forward(move,spd): #includes only positives
+    cmpc(0)
+    cmpc(3)
+    while gmpc(0)< move:
+        motor(0,spd)
+        motor(3,spd)
+    cmpc(0)
+    cmpc(3)
+def backwards(move,spd):
+    cmpc(0)
+    cmpc(3)
+    while gmpc(0)< move:
+        negmove = move *-1
+        motor(0,spd)
+        motor(3,spd)
+        if gmpc(0)<negmove:
+            break
+    cmpc(0)
+    cmpc(3)
+def left(move,spd):
+    cmpc(0)
+    while gmpc(0)< move:
+        motor(0,spd)
+    cmpc(0)
+def right(move,spd):
+    cmpc(3)
+    while gmpc(3)< move:
+        motor(3,spd)
+    cmpc(3)
+
+ssp(0,0)
+ssp(1,700)
+forward(5200,100)
+freeze(3)
+freeze(0)
+ssp(3,2000)
+sleep(1)
+ssp(0,500)
+sleep(1)
+right(2100,100)
+freeze(3)
+ssp(0,800)
+sleep(1)
+ssp(1,2500)
+sleep(1)
+backwards(-1000,100)
+ssp(0,500)
+sleep(0.5)
+ssp(0,100)
