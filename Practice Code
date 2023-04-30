@@ -1,0 +1,37 @@
+from kipr import *
+
+enable_servo(0)
+enable_servo(3)
+
+set_servo_position(0,100)
+set_servo_position(3,100)
+
+msleep(1000)
+cmpc(0)
+cmpc(3)
+
+while gmpc(0)<5800:
+    motor(0,100)
+    motor(3,100)
+ao()
+
+
+set_servo_position(0,2000)
+msleep(500)
+
+pos = 100
+while pos <2000:
+    set_servo_position(3, pos)
+    pos+=80
+    msleep(50)
+
+set_servo_position(0, 500)
+
+
+cmpc(0)
+cmpc(3)
+
+while gmpc(0)>-5800:
+    motor(0,-100)
+    motor(3,-100)
+ao()
